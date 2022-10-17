@@ -1,8 +1,10 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import styled from "styled-components";
 
-import "./App.css";
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import "./App.css";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,12 +16,23 @@ function App() {
 
   return (
     <div className="app">
-      <Header/>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
+      <>
+        <Header />
+        <AppBody>
+          <Sidebar />
+          <React.StrictMode>
+            <RouterProvider router={router} />
+            {/** Chat */}
+          </React.StrictMode>
+        </AppBody>
+      </>
     </div>
   );
 }
 
 export default App;
+
+const AppBody = styled.div`
+  display: flex;
+  height: 100vh;
+`;
