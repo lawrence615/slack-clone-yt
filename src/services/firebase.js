@@ -1,8 +1,46 @@
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  serverTimestamp,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+
 const firebaseConfig = {
-    apiKey: "AIzaSyAcTJicVh50W0rzRlVqkca2Dz1grjFc89k",
-    authDomain: "slack-clone-yt-8074d.firebaseapp.com",
-    projectId: "slack-clone-yt-8074d",
-    storageBucket: "slack-clone-yt-8074d.appspot.com",
-    messagingSenderId: "1090640484879",
-    appId: "1:1090640484879:web:18f2bb30291d6d5d78e17a"
-  };
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+export {
+  db,
+  auth,
+  provider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut,
+  addDoc,
+  collection,
+  serverTimestamp,
+  query,
+  orderBy,
+  onSnapshot,
+};
