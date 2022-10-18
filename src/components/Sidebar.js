@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import CreateIcon from "@mui/icons-material/Create";
@@ -10,12 +10,37 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AppsIcon from "@mui/icons-material/Apps";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddIcon from '@mui/icons-material/Add';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 import SidebarOption from "./SidebarOption";
+import {
+  collection,
+  db,
+  onSnapshot,
+  orderBy,
+  query,
+} from "../services/firebase";
 
 function Sidebar() {
+    const [channels, loading, error] = useCollection(collection(db, "rooms"), {
+        snapshotListenOptions: { includeMetadataChanges: true },
+      });
+
+      console.log('channels', channels)
+
+//   const [rooms, setRooms] = useState([]);
+
+//   useEffect(() => {
+//     const q = query(collection(db, "rooms"));
+//     onSnapshot(q, (querySnapshot) => {
+//       setRooms(
+//         querySnapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+//       );
+//     });
+//   }, []);
+
   return (
     <SidebarContainer>
       <SidebarHeader>
@@ -36,10 +61,11 @@ function Sidebar() {
       <SidebarOption Icon={AppsIcon} title="Apps" />
       <SidebarOption Icon={FileCopyIcon} title="File browser" />
       <SidebarOption Icon={ExpandLessIcon} title="Show less" />
-      <hr/>
+      <hr />
       <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
-      <hr/>
-      <SidebarOption Icon={AddIcon} title="Add Channel" />
+      <hr />
+      <SidebarOption Icon={AddIcon} title="Add Channel" addChannelOption />
+      {channels?.docs.map(doc=>(<SidebarOption key={doc.id} title={doc.data().name} id={doc.id} />))}
     </SidebarContainer>
   );
 }
