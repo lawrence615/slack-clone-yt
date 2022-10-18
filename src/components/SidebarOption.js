@@ -5,8 +5,7 @@ import { enterRoom } from "../features/appSlice";
 import { addDoc, collection, db } from "../services/firebase";
 
 function SidebarOption({ Icon, title, addChannelOption, id }) {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const addChannel = () => {
     const channelName = prompt("Please enter the channel name");
@@ -17,8 +16,8 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
   };
 
   const selectChannel = () => {
-    if(id){
-      dispatch(enterRoom({roomId:id}))
+    if (id) {
+      dispatch(enterRoom({ roomId: id }));
     }
   };
 
@@ -62,4 +61,7 @@ const SidebarOptionContainer = styled.div`
   }
 `;
 
-const SidebarOptionChannel = styled.h3`padding:10px; font-weight: 300;`;
+const SidebarOptionChannel = styled.h3`
+  padding: 10px;
+  font-weight: 300;
+`;
