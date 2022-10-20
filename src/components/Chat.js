@@ -6,19 +6,21 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 function Chat() {
   return (
     <ChatContainer>
-      <Header>
-        <HeaderLeft>
-          <h4>
-            <strong>#Room-name</strong>
-          </h4>
-          <StarBorderOutlinedIcon />
-        </HeaderLeft>
-        <HeaderRight>
-          <p>
-            <InfoOutlinedIcon /> Details
-          </p>
-        </HeaderRight>
-      </Header>
+      <>
+        <Header>
+          <HeaderLeft>
+            <h4>
+              <strong>#Room-name</strong>
+            </h4>
+            <StarBorderOutlinedIcon />
+          </HeaderLeft>
+          <HeaderRight>
+            <p>
+              <InfoOutlinedIcon /> Details
+            </p>
+          </HeaderRight>
+        </Header>
+      </>
     </ChatContainer>
   );
 }
