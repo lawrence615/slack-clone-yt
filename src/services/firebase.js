@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
+  doc,
   addDoc,
+  getDoc,
   collection,
   serverTimestamp,
   query,
@@ -37,7 +39,9 @@ export {
   signInWithPopup,
   onAuthStateChanged,
   signOut,
+  doc,
   addDoc,
+  getDoc,
   collection,
   serverTimestamp,
   query,
