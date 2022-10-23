@@ -13,33 +13,16 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import SidebarOption from "./SidebarOption";
-import {
-  collection,
-  db,
-  onSnapshot,
-  orderBy,
-  query,
-} from "../services/firebase";
+import { auth, collection, db } from "../services/firebase";
 
 function Sidebar() {
-    const [channels, loading, error] = useCollection(collection(db, "rooms"), {
-        snapshotListenOptions: { includeMetadataChanges: true },
-      });
-
-      console.log('channels', channels)
-
-//   const [rooms, setRooms] = useState([]);
-
-//   useEffect(() => {
-//     const q = query(collection(db, "rooms"));
-//     onSnapshot(q, (querySnapshot) => {
-//       setRooms(
-//         querySnapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-//       );
-//     });
-//   }, []);
+  const [user] = useAuthState(auth);
+  const [channels, loading, error] = useCollection(collection(db, "rooms"), {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
 
   return (
     <SidebarContainer>
@@ -48,7 +31,7 @@ function Sidebar() {
           <h2>PAPA FAM HQ</h2>
           <h3>
             <FiberManualRecordIcon />
-            Peter Boxxe
+            {user.displayName}
           </h3>
         </SidebarInfo>
         <CreateIcon />
@@ -65,7 +48,9 @@ function Sidebar() {
       <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
       <hr />
       <SidebarOption Icon={AddIcon} title="Add Channel" addChannelOption />
-      {channels?.docs.map(doc=>(<SidebarOption key={doc.id} title={doc.data().name} id={doc.id} />))}
+      {channels?.docs.map((doc) => (
+        <SidebarOption key={doc.id} title={doc.data().name} id={doc.id} />
+      ))}
     </SidebarContainer>
   );
 }
