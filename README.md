@@ -1,10 +1,22 @@
-# Getting Started with Create React App and Redux
+# ReactJS App (with Redux & Firebase)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+A second reacjs app built by following Sonny Sangha amazing [tutorial](https://www.youtube.com/watch?v=QiTq5WrWoJw&t=9008s&ab_channel=SonnySangha).
 
-## Available Scripts
+## Areas covered
 
-In the project directory, you can run:
+* Firebase Authentication
+* Redux
+* Firebase Hosting 
+* MaterialUI
+* React Router
+* CSS variables
+* Styled Components
+* Firebase Hooks
+
+
+
+## Run the app
+
 
 ### `npm start`
 
@@ -38,6 +50,9 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+
+  **NB:** Firebase config values should match the ones generated when you create a [new app](https://console.firebase.google.com/u/0/). First, save `.env.template` as `.env`; then replace the values.
 
 ## Learn More
 
