@@ -7,9 +7,8 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
 import { auth } from "./services/firebase";
-import "./App.css";
 import Login from "./components/Login";
-
+import "./App.css";
 function App() {
   const [user, loading] = useAuthState(auth);
 
