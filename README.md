@@ -1,6 +1,6 @@
 # ReactJS App (with Redux & Firebase)
 
-A second reacjs app built by following Sonny Sangha amazing [tutorial](https://www.youtube.com/watch?v=QiTq5WrWoJw&t=9008s&ab_channel=SonnySangha).
+A third reacjs app built by following Sonny Sangha amazing [tutorial](https://www.youtube.com/watch?v=QiTq5WrWoJw&t=9008s&ab_channel=SonnySangha). This is a Slack clone project.
 
 ## Areas covered
 
