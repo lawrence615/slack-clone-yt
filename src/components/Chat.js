@@ -21,49 +21,51 @@ function Chat() {
   );
 
   useEffect(() => {
-    chatRef?.current?.scrollIntoView({behavior:'smooth'});
+    chatRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [roomId, loading]);
 
   return (
     <ChatContainer>
-      <>
-        <Header>
-          <HeaderLeft>
-            <h4>
-              <strong>#{roomDetails?.data().name}</strong>
-            </h4>
-            <StarBorderOutlinedIcon />
-          </HeaderLeft>
-          <HeaderRight>
-            <p>
-              <InfoOutlinedIcon /> Details
-            </p>
-          </HeaderRight>
-        </Header>
+      {roomDetails && roomMessages && (
+        <>
+          <Header>
+            <HeaderLeft>
+              <h4>
+                <strong>#{roomDetails?.data().name}</strong>
+              </h4>
+              <StarBorderOutlinedIcon />
+            </HeaderLeft>
+            <HeaderRight>
+              <p>
+                <InfoOutlinedIcon /> Details
+              </p>
+            </HeaderRight>
+          </Header>
 
-        <ChatMessages>
-          {roomMessages?.docs.map((doc) => {
-            const { message, timestamp, user, userImage } = doc.data();
+          <ChatMessages>
+            {roomMessages?.docs.map((doc) => {
+              const { message, timestamp, user, userImage } = doc.data();
 
-            return (
-              <Message
-                key={doc.id}
-                message={message}
-                timestamp={timestamp}
-                user={user}
-                userImage={userImage}
-              />
-            );
-          })}
-          <ChatBottom ref={chatRef} />
-        </ChatMessages>
+              return (
+                <Message
+                  key={doc.id}
+                  message={message}
+                  timestamp={timestamp}
+                  user={user}
+                  userImage={userImage}
+                />
+              );
+            })}
+            <ChatBottom ref={chatRef} />
+          </ChatMessages>
 
-        <ChatInput
-          channelId={roomId}
-          channelName={roomDetails?.data().name}
-          chatRef={chatRef}
-        />
-      </>
+          <ChatInput
+            channelId={roomId}
+            channelName={roomDetails?.data().name}
+            chatRef={chatRef}
+          />
+        </>
+      )}
     </ChatContainer>
   );
 }
