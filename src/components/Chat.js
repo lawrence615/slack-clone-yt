@@ -59,9 +59,9 @@ function Chat() {
         </ChatMessages>
 
         <ChatInput
-          key={roomId}
           channelId={roomId}
           channelName={roomDetails?.data().name}
+          chatRef={chatRef}
         />
       </>
     </ChatContainer>
