@@ -1,8 +1,11 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 import {
   addDoc,
+  auth,
   collection,
   db,
   doc,
@@ -11,8 +14,9 @@ import {
 } from "../services/firebase";
 
 function ChatInput({ channelId, channelName, chatRef }) {
-//   const inputRef = useRef(null);
-  const [input, setInput] = useState('');
+  //   const inputRef = useRef(null);
+  const [input, setInput] = useState("");
+  const [user] = useAuthState(auth);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -24,21 +28,25 @@ function ChatInput({ channelId, channelName, chatRef }) {
     const docRef = doc(db, "rooms", channelId);
     const colRef = collection(docRef, "messages");
     addDoc(colRef, {
-      message: input    ,
+      message: input,
       timestamp: serverTimestamp(),
-      user:'Peter Boxxe',
-      userImage:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQguXQ1nOHR5nn_bvAJh3WYkJx5lhcoe629Kd8ihrl1Nz_RM_ceahkycj6123JzinuFKt0&usqp=CAU'
+      user: user.displayName,
+      userImage: user.photoURL,
     })
-      .then(() => setInput(''))
+      .then(() => setInput(""))
       .catch((e) => console.log(e));
 
-      chatRef?.current?.scrollIntoView({behavior:'smooth'});
+    chatRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <ChatInputContainer>
       <form action="POST">
-        <input value={input} onChange={e => setInput(e.target.value)} placeholder={`Message #${channelName}`} />
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder={`Message #${channelName}`}
+        />
         <Button hidden type="submit" onClick={sendMessage}>
           SEND
         </Button>
