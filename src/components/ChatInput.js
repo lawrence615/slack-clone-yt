@@ -10,7 +10,7 @@ import {
   serverTimestamp,
 } from "../services/firebase";
 
-function ChatInput({ channelId, channelName }) {
+function ChatInput({ channelId, channelName, chatRef }) {
 //   const inputRef = useRef(null);
   const [input, setInput] = useState('');
 
@@ -31,6 +31,8 @@ function ChatInput({ channelId, channelName }) {
     })
       .then(() => setInput(''))
       .catch((e) => console.log(e));
+
+      chatRef?.current?.scrollIntoView({behavior:'smooth'});
   };
 
   return (
